@@ -108,8 +108,8 @@ header.site {
   text-decoration: none;
 }
 .logo img {
-  width: clamp(80px, 9vw, 112px);
-  height: clamp(80px, 9vw, 112px);
+  width: clamp(200px, 9vw, 112px);
+  height: clamp(200px, 9vw, 112px);
   object-fit: contain;
   flex: none;
 }
