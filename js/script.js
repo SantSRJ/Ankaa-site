@@ -1,3 +1,31 @@
+document.querySelectorAll('.catalog-media[data-multi]').forEach(media => {
+  const track = media.querySelector('.m-track');
+  const dots = media.querySelectorAll('.dot');
+  let index = 0;
+
+  function goTo(i) {
+    index = (i + dots.length) % dots.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((d, di) => d.classList.toggle('is-active', di === index));
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', e => {
+      e.preventDefault();
+      goTo(Number(dot.dataset.idx));
+    });
+  });
+
+  // swipe táctil
+  let startX = 0;
+  track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  track.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (diff > 40) goTo(index - 1);
+    else if (diff < -40) goTo(index + 1);
+  });
+});
+
 // Menú hamburguesa responsive — sin dependencias externas.
 document.addEventListener("DOMContentLoaded", function () {
   var toggle = document.querySelector(".nav-toggle");
